@@ -24,20 +24,33 @@
 [samba_office]
 
     path = /srv/samba_office
+
     writeable = yes
+
     browsable = yes
+
     guest ok = yes
+
     read only = no
 
     // Yang ini untuk di bagian Aplikasi Android
+
     // Tambahan untuk memastikan izin folder baru
+
     // Izin default untuk file baru  
+
     create mask = 0777
+
     // Izin default untuk folder baru        
+
     directory mask = 0777
+
     // Memaksa izin untuk file baru
+
     force create mode = 0777
+
     // Memaksa izin untuk folder baru
+
     force directory mode = 0777
 
 
