@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Samba Server</string>
+    <string name="delete_button_desc">Delete Button</string>
+    <string name="download_button_desc">Download Button\n</string>
+</resources>

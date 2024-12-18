@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_add_folder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Folder"
+        android:icon="@drawable/ic_folder"
+        app:iconPadding="8dp"
+        app:iconTint="@color/black" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_upload_file"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload File"
+        android:icon="@drawable/ic_upload_file"
+        app:iconPadding="8dp"
+        app:iconTint="@color/black" />
+
+</LinearLayout>
