@@ -1,3 +1,11 @@
+NOTE :
+1. Samba Server dan aplikasi android harus berada di ip address yang sama (contohnya seperti smartphone & vm ubuntu memakai wifi yang sama)
+2. Cara cek ip address melalui vm dengan command `ip a`
+3. Ketika login, ganti bagian huruf `x` dengan ip address pada virtual machine tadi
+![WhatsApp Image 2024-12-19 at 01 19 12_0b7d7cfe](https://github.com/user-attachments/assets/8a8ddcf9-9931-4077-bf77-8a9545e7bb03)
+
+
+
 KONFIGURASI SAMBA SERVER FILE SHARING di Ubuntu Virtual Box (sebagai Virtual Machine)
 1. Network harus disetting menjadi Bridged Network (Sebelum run VM Ubuntu)
 2. sudo apt update
