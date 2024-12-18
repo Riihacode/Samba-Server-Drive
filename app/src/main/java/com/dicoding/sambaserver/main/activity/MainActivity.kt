@@ -37,16 +37,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                if (viewModel.isAtRootDirectory()) {
-                    isEnabled = false
-                    onBackPressedDispatcher.onBackPressed() // Kembali ke parent
-                } else {
-                    viewModel.navigateToParentDirectory()
-                }
-            }
-        })
+        onBackPressedNavigation()
 
         val smbUrl = intent.getStringExtra("server_url") ?: ""
         if (smbUrl.isEmpty()) {
@@ -71,6 +62,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.fabAdd.setOnClickListener { showBottomSheetMenu() }
+    }
+
+    private fun onBackPressedNavigation() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (viewModel.isAtRootDirectory()) {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed() // Kembali ke parent
+                } else {
+                    viewModel.navigateToParentDirectory()
+                }
+            }
+        })
     }
 
     fun updateFileList(newFileList: List<String>) {
@@ -120,7 +124,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    private fun openFilePicker() {
+    private fun uploadFilePicker() {
         uploadFileLauncher.launch("*/*")
     }
 
@@ -133,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         val bottomSheet = MenuBottomSheet { actionType ->
             when (actionType) {
                 MenuBottomSheet.ActionType.ADD_FOLDER -> showAddFolderDialog()
-                MenuBottomSheet.ActionType.UPLOAD_FILE -> openFilePicker()
+                MenuBottomSheet.ActionType.UPLOAD_FILE -> uploadFilePicker()
             }
         }
         bottomSheet.show(supportFragmentManager, "MenuBottomSheet")

@@ -18,10 +18,10 @@ class FileListAdapter(
 ) : ListAdapter<String, FileListAdapter.FileViewHolder>(FileDiffCallback()) {
 
     inner class FileViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val fileIcon: ImageView = view.findViewById(R.id.file_icon)
-        val fileName: TextView = view.findViewById(R.id.file_name)
-        val deleteButton: ImageButton = view.findViewById(R.id.delete_button)
-        val downloadButton: ImageButton = view.findViewById(R.id.download_button)
+        private val fileIcon: ImageView = view.findViewById(R.id.file_icon)
+        private val fileName: TextView = view.findViewById(R.id.file_name)
+        private val deleteButton: ImageButton = view.findViewById(R.id.delete_button)
+        private val downloadButton: ImageButton = view.findViewById(R.id.download_button)
 
         fun bind(fileName: String) {
             this.fileName.text = fileName
