@@ -6,15 +6,15 @@
     android:padding="8dp">
 
     <ImageView
-        android:id="@+id/file_icon"
+        android:id="@+id/item_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/ic_file"
-        android:contentDescription="File Icon"
+        android:contentDescription="Item Icon"
         android:layout_marginEnd="8dp" />
 
     <TextView
-        android:id="@+id/file_name"
+        android:id="@+id/item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"

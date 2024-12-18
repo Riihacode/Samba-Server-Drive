@@ -44,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    // mengarahkan pengguna ke MainActivity setelah memasukkan URL server.
     private fun navigateToMainActivity(serverUrl: String) {
         val intent = Intent(this, MainActivity::class.java).apply {
             putExtra("server_url", serverUrl)
@@ -52,6 +53,7 @@ class LoginActivity : AppCompatActivity() {
         finish()
     }
 
+    // memantau serverUrl dari LoginViewModel, yang diatur berdasarkan hostname yang telah direalisasi.
     private fun setupObservers() {
         viewModel.serverUrl.observe(this) { url ->
             if (!url.isNullOrEmpty()) {

@@ -81,11 +81,18 @@ class MainActivity : AppCompatActivity() {
         viewModel.updateFileList(newFileList)
     }
 
+    // menampilkan daftar direktori dan file.
     private fun setupRecyclerView() {
         binding.fileList.layoutManager = LinearLayoutManager(this)
         binding.fileList.adapter = FileListAdapter(
-            onFileClick = { fileName -> viewModel.onFileClick(this, fileName) },
-            onDeleteClick = { fileName -> confirmDelete(fileName) },
+            onItemClick = { itemName ->
+                // Periksa apakah item adalah folder atau file
+                if (itemName.endsWith("/")) {
+                    viewModel.openFolder(this, itemName) // Menggunakan openFolder untuk membuka folder
+                } else {
+                    viewModel.openFile(this, itemName) // Menggunakan openFile untuk membuka file
+                }
+            },onDeleteClick = { fileName -> confirmDelete(fileName) },
             onDownloadClick = { fileName -> pickDownloadLocation(fileName) }
         )
     }
@@ -103,9 +110,9 @@ class MainActivity : AppCompatActivity() {
         viewModel.loading.observe(this) { isLoading ->
             binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
-
     }
 
+    //  memulai ActivityResultLauncher untuk memilih file.
     private val uploadFileLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
             if (uri != null) {
@@ -114,7 +121,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "No file selected for upload", Toast.LENGTH_SHORT).show()
             }
         }
+    //  untuk memilih file.
+    private fun uploadFilePicker() {
+        uploadFileLauncher.launch("*/*")
+    }
 
+    // memulai ActivityResultLauncher untuk memilih lokasi penyimpanan.
     private val downloadFileLauncher =
         registerForActivityResult(ActivityResultContracts.CreateDocument("application/octet-stream")) { uri ->
             if (uri != null && pendingDownloadFileName != null) {
@@ -124,10 +136,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-    private fun uploadFilePicker() {
-        uploadFileLauncher.launch("*/*")
-    }
-
+    // untuk memilih lokasi penyimpanan.
     private fun pickDownloadLocation(fileName: String) {
         pendingDownloadFileName = fileName
         downloadFileLauncher.launch(fileName)

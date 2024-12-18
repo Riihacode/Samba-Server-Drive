@@ -24,6 +24,7 @@ class SambaRepository(var smbUrl: String) {
     suspend fun initialize() = withContext(Dispatchers.IO) {
         try {
             cifsContext = BaseContext(PropertyConfiguration(Properties().apply {
+                // Proses login dilakukan menggunakan akun guest
                 setProperty("jcifs.smb.client.username", "guest")
                 setProperty("jcifs.smb.client.password", "")
             }))
@@ -76,6 +77,7 @@ class SambaRepository(var smbUrl: String) {
         }
     }
 
+    // Mendownload File
     suspend fun downloadFileToCustomLocation(context: Context, fileName: String, fileUri: Uri) = withContext(Dispatchers.IO) {
         try {
             val remoteFile = SmbFile("$smbUrl/$fileName", cifsContext)
@@ -90,51 +92,64 @@ class SambaRepository(var smbUrl: String) {
         }
     }
 
+    // untuk membuka folder tertentu.
+    suspend fun openFolder(context: Context, folderName: String) = withContext(Dispatchers.IO) {
+        try {
+            val folder = SmbFile("$smbUrl/$folderName", cifsContext)
+
+            if (!folder.exists() || !folder.isDirectory) {
+                throw Exception("Folder does not exist or is not a directory")
+            }
+
+            // Update URL direktori saat ini
+            smbUrl = folder.canonicalPath
+            val filesInDirectory = folder.listFiles().map { it.name }
+
+            // Update daftar file di UI thread
+            withContext(Dispatchers.Main) {
+                (context as? MainActivity)?.updateFileList(filesInDirectory)
+            }
+        } catch (e: Exception) {
+            Log.e("SambaRepository", "Error navigating to folder: ${e.message}", e)
+            throw e
+        }
+    }
+
     suspend fun openFile(context: Context, fileName: String) = withContext(Dispatchers.IO) {
         try {
             val remoteFile = SmbFile("$smbUrl/$fileName", cifsContext)
 
-            if (!remoteFile.exists()) {
-                throw Exception("File does not exist on the server")
+            if (!remoteFile.exists() || remoteFile.isDirectory) {
+                throw Exception("File does not exist or is a directory")
             }
 
-            if (remoteFile.isDirectory) {
-                // Jika file adalah direktori, navigasi ke direktori tersebut
-                smbUrl = remoteFile.canonicalPath // Update URL direktori saat ini
-                val filesInDirectory = remoteFile.listFiles().map { it.name }
-                withContext(Dispatchers.Main) {
-                    (context as? MainActivity)?.updateFileList(filesInDirectory)
+            // Unduh file ke cache lokal
+            val localFile = File(context.cacheDir, fileName)
+            remoteFile.inputStream.use { input ->
+                localFile.outputStream().use { output ->
+                    input.copyTo(output)
                 }
-            } else {
-                // Jika file adalah file, unduh ke cache lokal dan buka
-                val localFile = File(context.cacheDir, fileName)
-                remoteFile.inputStream.use { input ->
-                    localFile.outputStream().use { output ->
-                        input.copyTo(output)
-                    }
+            }
+
+            // Gunakan FileProvider untuk URI aman
+            val fileUri = FileProvider.getUriForFile(
+                context,
+                "${context.packageName}.provider",
+                localFile
+            )
+
+            // Tentukan MIME type dan buka file
+            val mimeType = context.contentResolver.getType(fileUri) ?: "application/octet-stream"
+            withContext(Dispatchers.Main) {
+                val intent = Intent(Intent.ACTION_VIEW).apply {
+                    setDataAndType(fileUri, mimeType)
+                    addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
 
-                // Gunakan FileProvider untuk mendapatkan URI aman
-                val fileUri = FileProvider.getUriForFile(
-                    context,
-                    "${context.packageName}.provider",
-                    localFile
-                )
-
-                // Tentukan MIME type untuk membuka file
-                val mimeType = context.contentResolver.getType(fileUri) ?: "application/octet-stream"
-
-                withContext(Dispatchers.Main) {
-                    val intent = Intent(Intent.ACTION_VIEW).apply {
-                        setDataAndType(fileUri, mimeType)
-                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    }
-
-                    try {
-                        context.startActivity(intent)
-                    } catch (e: Exception) {
-                        throw Exception("No application available to open this file")
-                    }
+                try {
+                    context.startActivity(intent)
+                } catch (e: Exception) {
+                    throw Exception("No application available to open this file")
                 }
             }
         } catch (e: Exception) {
@@ -143,6 +158,9 @@ class SambaRepository(var smbUrl: String) {
         }
     }
 
+
+
+    // Membuat Folder
     suspend fun createFolder(folderName: String) = withContext(Dispatchers.IO) {
         try {
             val newFolder = SmbFile("$smbUrl/$folderName/", cifsContext)
@@ -163,6 +181,7 @@ class SambaRepository(var smbUrl: String) {
         Log.d("SambaRepository", "Samba URL updated to: $smbUrl")
     }
 
+    // untuk mengunggah file.
     suspend fun uploadFile(context: Context,uri: Uri) = withContext(Dispatchers.IO) {
         try {
             val fileName = DocumentFile.fromSingleUri(context, uri)?.name ?: "uploaded_file"

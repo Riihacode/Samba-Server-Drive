@@ -12,24 +12,24 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dicoding.sambaserver.R
 
 class FileListAdapter(
-    private val onFileClick: (String) -> Unit,
+    private val onItemClick: (String) -> Unit,
     private val onDeleteClick: (String) -> Unit,
     private val onDownloadClick: (String) -> Unit
 ) : ListAdapter<String, FileListAdapter.FileViewHolder>(FileDiffCallback()) {
 
     inner class FileViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val fileIcon: ImageView = view.findViewById(R.id.file_icon)
-        private val fileName: TextView = view.findViewById(R.id.file_name)
+        private val itemIcon: ImageView = view.findViewById(R.id.item_icon)
+        private val itemName: TextView = view.findViewById(R.id.item_name)
         private val deleteButton: ImageButton = view.findViewById(R.id.delete_button)
         private val downloadButton: ImageButton = view.findViewById(R.id.download_button)
 
-        fun bind(fileName: String) {
-            this.fileName.text = fileName
-            fileIcon.setImageResource(if (fileName.endsWith("/")) R.drawable.ic_folder else R.drawable.ic_file)
+        fun bind(itemName: String) {
+            this.itemName.text = itemName
+            itemIcon.setImageResource(if (itemName.endsWith("/")) R.drawable.ic_folder else R.drawable.ic_file)
 
-            deleteButton.setOnClickListener { onDeleteClick(fileName) }
-            downloadButton.setOnClickListener { onDownloadClick(fileName) }
-            itemView.setOnClickListener { onFileClick(fileName) }
+            deleteButton.setOnClickListener { onDeleteClick(itemName) }
+            downloadButton.setOnClickListener { onDownloadClick(itemName) }
+            itemView.setOnClickListener { onItemClick(itemName) }
         }
     }
 

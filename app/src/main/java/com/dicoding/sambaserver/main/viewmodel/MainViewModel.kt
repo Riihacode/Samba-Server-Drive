@@ -34,6 +34,7 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         }
     }
 
+    // memuat daftar file dari direktori saat ini menggunakan SambaRepository.
     fun fetchFiles() {
         _loading.value = true
         viewModelScope.launch {
@@ -63,6 +64,7 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         }
     }
 
+    // Mendownload File
     fun downloadFileToCustomLocation(context: Context, fileName: String, fileUri: Uri) {
         viewModelScope.launch {
             try {
@@ -75,6 +77,7 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         }
     }
 
+    // Membuat Folder
     fun createFolder(folderName: String) {
         viewModelScope.launch {
             try {
@@ -88,13 +91,26 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         }
     }
 
-    fun onFileClick(context: Context, fileName: String) {
+    // untuk membuka file tertentu.
+    fun openFile(context: Context, fileName: String) {
         viewModelScope.launch {
             try {
                 repository.openFile(context, fileName)
             } catch (e: Exception) {
-                Log.e("MainViewModel", "Error opening file: ${e.message}", e)
+                Log.e("FileViewModel", "Error opening file: ${e.message}", e)
                 _toastMessage.postValue("Error opening file: ${e.message}")
+            }
+        }
+    }
+
+    fun openFolder(context: Context, folderName: String) {
+        viewModelScope.launch {
+            try {
+                repository.openFolder(context, folderName)
+                fetchFiles()
+            } catch (e: Exception) {
+                Log.e("FolderViewModel", "Error navigating to folder: ${e.message}", e)
+                _toastMessage.postValue("Error navigating to folder: ${e.message}")
             }
         }
     }
@@ -103,6 +119,7 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         _files.postValue(newFileList)
     }
 
+    //  untuk mengunggah file.
     fun uploadFile(context: Context, uri: Uri) {
         viewModelScope.launch {
             try {
@@ -116,6 +133,7 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         }
     }
 
+    // memungkinkan navigasi ke direktori induk.
     fun navigateToParentDirectory() {
         viewModelScope.launch {
             try {
@@ -150,6 +168,7 @@ class MainViewModel(private val repository: SambaRepository) : ViewModel() {
         }
     }
 
+    // memeriksa apakah pengguna berada di direktori root.
     fun isAtRootDirectory(): Boolean {
         return repository.isAtRootDirectory()
     }
