@@ -23,7 +23,7 @@
         android:theme="@style/Theme.SambaServer"
         tools:targetApi="33">
         <activity
-            android:name=".splashscreen.SplashScreenActivity"
+            android:name=".main.activity.MainActivity"
             android:exported="false" />
         <activity
             android:name=".profile.ProfileActivity"
@@ -43,7 +43,8 @@
             android:name=".login.activity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".main.activity.MainActivity"
+            android:name=".splashscreen.SplashScreenActivity"
+            android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
