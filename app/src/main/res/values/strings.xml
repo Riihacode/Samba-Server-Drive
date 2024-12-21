@@ -16,19 +16,19 @@
     <string name="deskripsi">Deskripsi</string>
 
     <string-array name="member_name">
-        <item>Muhammad Hafizh Maulana</item>
-        <item>Ribhan Aulia Zulmi</item>
-        <item>Desi Mariana Lumban Gaol</item>
-        <item>Baiq Afifah Hanum</item>
-        <item>Nadia Sabrina Salsabila</item>
+        <item>xxx</item>
+        <item>xxx</item>
+        <item>xxx</item>
+        <item>xxx</item>
+        <item>xxx</item>
     </string-array>
 
     <string-array name="member_description_nim">
-        <item>123210191</item>
-        <item>123210038</item>
-        <item>123220009</item>
-        <item>123220037</item>
-        <item>123220039</item>
+        <item>12321xxxx</item>
+        <item>12321xxxx</item>
+        <item>12322xxxx</item>
+        <item>12322xxxx</item>
+        <item>12322xxxx</item>
     </string-array>
 
     <string-array name="member_description_class">
@@ -40,11 +40,11 @@
     </string-array>
 
     <string-array name="member_photo">
-        <item>@drawable/square_hafizh</item>
-        <item>@drawable/square_ribhan</item>
-        <item>@drawable/desi</item>
-        <item>@drawable/square_afifah</item>
-        <item>@drawable/square_nadia</item>
+        <item>@drawable/ggwp</item>
+        <item>@drawable/ggwp</item>
+        <item>@drawable/ggwp</item>
+        <item>@drawable/ggwp</item>
+        <item>@drawable/ggwp</item>
     </string-array>
 
     <string-array name="member_role">
