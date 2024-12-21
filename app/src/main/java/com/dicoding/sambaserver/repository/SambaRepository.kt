@@ -39,7 +39,7 @@ class SambaRepository(var smbUrl: String) {
         try {
             InetAddress.getByName(hostname).hostAddress
         } catch (e: Exception) {
-            "192.xxx.xxx.xx" // Fallback ke IP default
+            "192.xxx.xxx.xx"
         }
     }
 
@@ -115,6 +115,7 @@ class SambaRepository(var smbUrl: String) {
         }
     }
 
+    // untuk membuka file tertentu.
     suspend fun openFile(context: Context, fileName: String) = withContext(Dispatchers.IO) {
         try {
             val remoteFile = SmbFile("$smbUrl/$fileName", cifsContext)
@@ -157,8 +158,6 @@ class SambaRepository(var smbUrl: String) {
             throw e
         }
     }
-
-
 
     // Membuat Folder
     suspend fun createFolder(folderName: String) = withContext(Dispatchers.IO) {

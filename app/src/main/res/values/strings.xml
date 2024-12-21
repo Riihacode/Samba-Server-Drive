@@ -2,4 +2,65 @@
     <string name="app_name">Samba Server</string>
     <string name="delete_button_desc">Delete Button</string>
     <string name="download_button_desc">Download Button\n</string>
+    <string name="item_icon">Item Icon</string>
+    <string name="overflow_menu_desc">Overflow Menu Description</string>
+    <string name="delete">Delete</string>
+    <string name="delete_option_desc">Delete Option Description</string>
+    <string name="download">Download\n</string>
+    <string name="download_option_desc">Download Option Description</string>
+    <string name="kelompok_7_sistem_operasi">Kelompok 7 - Sistem Operasi (IF-C)</string>
+    <string name="titik_dua">:</string>
+    <string name="deskripsi_samba_server_android">Aplikasi Android Samba Server adalah sebuah aplikasi berbasis Android yang dirancang untuk menyediakan akses, pengelolaan, dan manipulasi file menggunakan protokol SMB (Server Message Block) melalui integrasi dengan Samba Server. Aplikasi ini memungkinkan pengguna untuk berinteraksi dengan file dan folder yang berada di server lokal secara langsung dari perangkat Android mereka, sehingga menciptakan pengalaman manajemen file yang fleksibel, cepat, dan aman.</string>
+    <string name="powered_by_kelompok_7">Powered by Kelompok 7</string>
+    <string name="splash_screen_section">Splash Screen Section</string>
+    <string name="deskripsi">Deskripsi</string>
+
+    <string-array name="member_name">
+        <item>Muhammad Hafizh Maulana</item>
+        <item>Ribhan Aulia Zulmi</item>
+        <item>Desi Mariana Lumban Gaol</item>
+        <item>Baiq Afifah Hanum</item>
+        <item>Nadia Sabrina Salsabila</item>
+    </string-array>
+
+    <string-array name="member_description_nim">
+        <item>123210191</item>
+        <item>123210038</item>
+        <item>123220009</item>
+        <item>123220037</item>
+        <item>123220039</item>
+    </string-array>
+
+    <string-array name="member_description_class">
+        <item>Sistem Operasi IF-C</item>
+        <item>Sistem Operasi IF-C</item>
+        <item>Sistem Operasi IF-C</item>
+        <item>Sistem Operasi IF-C</item>
+        <item>Sistem Operasi IF-C</item>
+    </string-array>
+
+    <string-array name="member_photo">
+        <item>@drawable/square_hafizh</item>
+        <item>@drawable/square_ribhan</item>
+        <item>@drawable/desi</item>
+        <item>@drawable/square_afifah</item>
+        <item>@drawable/square_nadia</item>
+    </string-array>
+
+    <string-array name="member_role">
+        <item>Ketua</item>
+        <item>Wakil Ketua</item>
+        <item>Anggota</item>
+        <item>Anggota</item>
+        <item>Anggota</item>
+    </string-array>
+
+    <string-array name="member_duty">
+        <item>Konfigurasi Samba, Tester, &amp; Bug Hunter</item>
+        <item>Android, Konfigurasi Samba, Tester, &amp; Bug Hunter</item>
+        <item>Tester &amp; Bug Hunter</item>
+        <item>Tester &amp; Bug Hunter</item>
+        <item>Tester &amp; Bug Hunter</item>
+    </string-array>
+
 </resources>

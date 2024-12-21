@@ -23,6 +23,7 @@ import com.dicoding.sambaserver.login.activity.LoginActivity
 import com.dicoding.sambaserver.menubottomsheet.MenuBottomSheet
 import com.dicoding.sambaserver.repository.SambaRepository
 import com.dicoding.sambaserver.main.viewmodel.MainViewModel
+import com.dicoding.sambaserver.profile.ProfileActivity
 import com.dicoding.sambaserver.viewmodelfactory.ViewModelFactory
 import kotlinx.coroutines.launch
 
@@ -93,7 +94,14 @@ class MainActivity : AppCompatActivity() {
                     viewModel.openFile(this, itemName) // Menggunakan openFile untuk membuka file
                 }
             },onDeleteClick = { fileName -> confirmDelete(fileName) },
-            onDownloadClick = { fileName -> pickDownloadLocation(fileName) }
+            onDownloadClick = { fileName ->
+                // Hanya eksekusi jika fileName bukan folder
+                if (!fileName.endsWith("/")) {
+                    pickDownloadLocation(fileName)
+                } else {
+                    Toast.makeText(this, "Cannot download a folder", Toast.LENGTH_SHORT).show()
+                }
+            }
         )
     }
 
@@ -205,11 +213,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.menu_profile -> {
+                showProfile()
+                true
+            }
+
             R.id.menu_logout -> {
                 performLogout()
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showProfile() {
+        val intent = Intent(this, ProfileActivity::class.java)
+        startActivity(intent)
     }
 }

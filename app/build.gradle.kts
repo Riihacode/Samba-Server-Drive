@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -9,8 +10,8 @@ android {
 
     defaultConfig {
         applicationId = "com.dicoding.sambaserver"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 29
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -59,5 +60,5 @@ dependencies {
     implementation (libs.kotlinx.coroutines.android)
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
 
-
+    implementation(libs.glide)
 }

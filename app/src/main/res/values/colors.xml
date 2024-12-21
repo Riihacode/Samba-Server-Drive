@@ -11,4 +11,5 @@
     <color name="pink_500">#D81B60</color>
     <color name="pink_200">#FF8FAF</color>
     <color name="pink_custom">#F06071</color>
+    <color name="gray">#D3D3D3</color> <!-- Warna abu-abu -->
 </resources>

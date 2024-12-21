@@ -3,42 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     android:padding="8dp">
 
+    <!-- File Icon -->
     <ImageView
         android:id="@+id/item_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_gravity="center"
         android:src="@drawable/ic_file"
-        android:contentDescription="Item Icon"
+        android:contentDescription="@string/item_icon"
         android:layout_marginEnd="8dp" />
 
+    <!-- File Name -->
     <TextView
         android:id="@+id/item_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_weight="1"
         android:textSize="16sp"
         android:textColor="#000000"
         android:ellipsize="end"
         android:maxLines="1" />
 
+    <!-- Overflow Menu (Three Dots) -->
     <ImageButton
-        android:id="@+id/download_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_download"
-        android:contentDescription="@string/download_button_desc"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:layout_marginEnd="8dp" />
-
-
-    <ImageButton
-        android:id="@+id/delete_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_delete"
-        android:contentDescription="@string/delete_button_desc"
+        android:id="@+id/overflow_menu"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_more_vert"
+        android:contentDescription="@string/overflow_menu_desc"
         android:background="?attr/selectableItemBackgroundBorderless" />
-
 </LinearLayout>

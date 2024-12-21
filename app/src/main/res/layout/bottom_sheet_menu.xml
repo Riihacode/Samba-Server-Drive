@@ -1,27 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_add_folder"
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Folder"
-        android:icon="@drawable/ic_folder"
-        app:iconPadding="8dp"
-        app:iconTint="@color/black" />
+        android:columnCount="3"
+        android:rowCount="2"
+        android:alignmentMode="alignMargins"
+        android:padding="8dp">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_upload_file"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Upload File"
-        android:icon="@drawable/ic_upload_file"
-        app:iconPadding="8dp"
-        app:iconTint="@color/black" />
+        <!-- Folder Button -->
+        <LinearLayout
+            android:id="@+id/btn_add_folder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="4dp"
+            android:padding="16dp">
 
+            <ImageView
+                android:id="@+id/icon_folder"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_new_folder"
+                android:contentDescription="Folder Icon"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/text_folder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="New Folder"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <!-- Upload Button -->
+        <LinearLayout
+            android:id="@+id/btn_upload_file"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_columnWeight="1"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:elevation="4dp"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/icon_upload"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_upload_file"
+                android:contentDescription="Upload Icon"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/text_upload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Upload File"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:gravity="center" />
+        </LinearLayout>
+    </GridLayout>
 </LinearLayout>
