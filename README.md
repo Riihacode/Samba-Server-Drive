@@ -1,3 +1,7 @@
+# VIDEO DEMO PROGRAM (FINAL)
+https://youtu.be/xF5oWoQwNMA 
+
+
 # NOTE :
 1. Samba Server dan aplikasi android harus berada di ip address yang sama (contohnya seperti smartphone & vm ubuntu memakai wifi yang sama)
 2. Cara cek ip address melalui vm dengan command `ip a`
@@ -56,3 +60,6 @@
 
 13. sudo systemctl restart smbd		(untuk restart server samba & menjalankan samba server; kalau ingin inisialisasi pertama kali `restart` diganti start; klo ingin stop `restart` diganti stop)	
 14. smbclient -L  localhost -N
+
+
+
